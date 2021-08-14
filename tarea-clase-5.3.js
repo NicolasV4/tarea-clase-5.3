@@ -6,21 +6,21 @@ $aceptar.onclick = function (){
     const segundos = document.querySelectorAll('.segundos');
 
     
-    let sumatoriaDeHoras = 0; //calcula total de horas en decimal
+    let sumatoriaDeHoras = 0; //calcula valor entero de horas
     for(let i = 0; i < horas.length; i++){                
         sumatoriaDeHoras += Number(horas[i].value);
 
     }
     
 
-    let sumatoriaDeMinutos = 0; //calcula total de minutos en decimal
+    let sumatoriaDeMinutos = 0; //calcula valor entero de minutos
     for(let i = 0; i < minutos.length; i++){              
         sumatoriaDeMinutos += Number(minutos[i].value);
 
     }
     
 
-    let sumatoriaDeSegundos = 0; //calcula total de segundos en decimal
+    let sumatoriaDeSegundos = 0; //calcula calcula valor entero de segundos
     for(let i = 0; i < segundos.length; i++){             
         sumatoriaDeSegundos += Number(segundos[i].value);
 
@@ -33,25 +33,15 @@ $aceptar.onclick = function (){
     
     let segundosTotalesDeVideo = horasEnSegundos + minutosEnSegundos + sumatoriaDeSegundos;
 
-    console.log(segundosTotalesDeVideo); 
+    
 
-    let contadoHoras = 0;         //almacena cantidad de horas
-    while (segundosTotalesDeVideo>3600){
-        for (let i = 3600; segundosTotalesDeVideo >= i; contadoHoras++){
-            segundosTotalesDeVideo = segundosTotalesDeVideo - i;
+    let minutosDeSegundos = Math.floor(segundosTotalesDeVideo / 60) // calcula total de segundos y la totalidad de los minutos
+    const segundosRestantes = segundosTotalesDeVideo % 60
 
-        }
-    }
+    const horasDeMinutos = Math.floor(minutosDeSegundos / 60) // calcula la totalidad de horas en base a los minutos resantes
+    minutosDeSegundos = minutosDeSegundos % 60
 
-    let contadoMinutos = 0;  //almacena cantidad de minutos luego de descontar las horas
-    while (segundosTotalesDeVideo>60){
-        for (segundosTotalesDeVideo; segundosTotalesDeVideo >= 60; contadoMinutos++){
-            segundosTotalesDeVideo = segundosTotalesDeVideo - 60
-
-        }
-    }
-
-    document.querySelector('#resultado').innerText = (contadoHoras + ' horas ' + contadoMinutos + ' minutos ' + segundosTotalesDeVideo + ' segundos ');
+    document.querySelector('#resultado').innerText = (horasDeMinutos + ' horas ' + minutosDeSegundos + ' minutos ' + segundosRestantes + ' segundos ');
 
     return false;
 
